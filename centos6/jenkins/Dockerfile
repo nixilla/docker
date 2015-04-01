@@ -12,7 +12,7 @@ RUN adduser jenkins
 RUN echo "jenkins:jenkins" | chpasswd
 
 # sudo
-RUN yum -y install sudo && chmod u+w /etc/sudoers && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN yum -y install sudo && chmod u+w /etc/sudoers && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && sed -i "s^Defaults    requiretty^#Defaults    requiretty^" /etc/sudoers
 
 # install httpd
 RUN yum -y install httpd vim-enhanced bash-completion unzip
