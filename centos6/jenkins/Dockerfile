@@ -19,7 +19,7 @@ ADD ./configs/supervisord.conf /etc/supervisord.conf
 
 RUN chmod 755 /start.sh
 RUN chmod 755 /etc/apache2/foreground.sh
-RUN mkdir /var/log/supervisor/
+RUN mkdir -m 755 /var/log/supervisor/
 
 # zeromq
 yum install -y zeromq zeromq-devel
