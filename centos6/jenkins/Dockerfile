@@ -3,6 +3,17 @@ FROM centos:6
 # install http
 RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
+# update
+RUN yum -y update
+
+# Add user jenkins to the image
+RUN adduser jenkins
+# Set password for the jenkins user (you may want to alter this).
+RUN echo "jenkins:jenkins" | chpasswd
+
+# sudo
+RUN yum -y install sudo && chmod u+w /etc/sudoers && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 # install httpd
 RUN yum -y install httpd vim-enhanced bash-completion unzip
 RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/workspace/HR/docroot\"^" /etc/httpd/conf/httpd.conf
@@ -38,11 +49,6 @@ RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 RUN yum install -y openssh-server openssh-clients passwd
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN sed -ri 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config && echo 'root:changeme' | chpasswd
-
-# Add user jenkins to the image
-RUN adduser jenkins
-# Set password for the jenkins user (you may want to alter this).
-RUN echo "jenkins:jenkins" | chpasswd
 
 EXPOSE 22
 EXPOSE 80
