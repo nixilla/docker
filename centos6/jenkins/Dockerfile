@@ -14,7 +14,7 @@ yum -y install python-pip
 pip install supervisor
 
 ADD ./scripts/start.sh /start.sh
-ADD ./scripts/foreground.sh /etc/apache2/foreground.sh
+ADD ./scripts/apache.sh /etc/apache2/foreground.sh
 ADD ./configs/supervisord.conf /etc/supervisord.conf
 
 RUN chmod 755 /start.sh
