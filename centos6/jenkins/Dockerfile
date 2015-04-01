@@ -47,4 +47,4 @@ RUN echo "jenkins:jenkins" | chpasswd
 EXPOSE 22
 EXPOSE 80
 
-CMD ["/bin/bash", "/start.sh"]
+CMD ["/usr/sbin/sshd", "-D"]
