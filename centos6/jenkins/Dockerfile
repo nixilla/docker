@@ -21,6 +21,7 @@ RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/worksp
 # php
 RUN yum -y install git ant vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
 RUN yum install -y uuid-devel pkgconfig libtool gcc-c++ php-pecl-xdebug php-pecl-uuid git php-intl
+RUN sed -i "s^;date.timezone =^date.timezone = Europe/London^" /etc/php.ini
 
 # zeromq
 RUN yum install -y zeromq zeromq-devel
