@@ -8,10 +8,10 @@ RUN yum -y install httpd vim-enhanced bash-completion unzip
 RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/workspace/HR/docroot\"^" /etc/httpd/conf/httpd.conf && \
 
 # php
-yum -y install git ant vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
-yum install -y uuid-devel pkgconfig libtool gcc-c++ php-pecl-xdebug php-pecl-uuid git php-intl
-yum -y install python-pip
-pip install supervisor
+RUN yum -y install git ant vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
+RUN yum install -y uuid-devel pkgconfig libtool gcc-c++ php-pecl-xdebug php-pecl-uuid git php-intl
+RUN yum -y install python-pip
+RUN pip install supervisor
 
 ADD ./scripts/start.sh /start.sh
 ADD ./scripts/apache.sh /etc/apache2/foreground.sh
@@ -22,12 +22,12 @@ RUN chmod 755 /etc/apache2/foreground.sh
 RUN mkdir -m 755 /var/log/supervisor/
 
 # zeromq
-yum install -y zeromq zeromq-devel
-printf "\n" | pecl install zmq-beta
-echo "extension=zmq.so" > /etc/php.d/zmq.ini
+RUN yum install -y zeromq zeromq-devel
+RUN printf "\n" | pecl install zmq-beta
+RUN echo "extension=zmq.so" > /etc/php.d/zmq.ini
 
 # xdebug
-echo "xdebug.max_nesting_level=200" >> /etc/php.d/xdebug.ini
+RUN echo "xdebug.max_nesting_level=200" >> /etc/php.d/xdebug.ini
 
 # start httpd
 RUN mkdir -p /home/jenkins/workspace/HR/docroot
