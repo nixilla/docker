@@ -5,7 +5,7 @@ RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noar
 
 # install httpd
 RUN yum -y install httpd vim-enhanced bash-completion unzip
-RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/workspace/HR/docroot\"^" /etc/httpd/conf/httpd.conf && \
+RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/workspace/HR/docroot\"^" /etc/httpd/conf/httpd.conf
 
 # php
 RUN yum -y install git ant vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
