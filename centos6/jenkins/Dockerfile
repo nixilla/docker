@@ -21,16 +21,6 @@ RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/worksp
 # php
 RUN yum -y install git ant vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
 RUN yum install -y uuid-devel pkgconfig libtool gcc-c++ php-pecl-xdebug php-pecl-uuid git php-intl
-RUN yum -y install python-pip
-RUN pip install supervisor
-
-ADD ./scripts/start.sh /start.sh
-ADD ./scripts/apache.sh /etc/apache2/foreground.sh
-ADD ./configs/supervisord.conf /etc/supervisord.conf
-
-RUN chmod 755 /start.sh
-RUN chmod 755 /etc/apache2/foreground.sh
-RUN mkdir -m 755 /var/log/supervisor/
 
 # zeromq
 RUN yum install -y zeromq zeromq-devel
@@ -39,9 +29,6 @@ RUN echo "extension=zmq.so" > /etc/php.d/zmq.ini
 
 # xdebug
 RUN echo "xdebug.max_nesting_level=200" >> /etc/php.d/xdebug.ini
-
-# start httpd
-RUN mkdir -p /home/jenkins/workspace/HR/docroot
 
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 
