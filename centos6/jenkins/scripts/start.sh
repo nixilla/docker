@@ -5,4 +5,5 @@
 mysql -uroot -e "CREATE DATABASE wordpress; GRANT ALL PRIVILEGES ON development_hr.* TO 'root'@'%'; FLUSH PRIVILEGES;"
 killall mysqld
 sleep 10s
+echo "Starting supervisord"
 supervisord -n

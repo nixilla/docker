@@ -31,12 +31,8 @@ echo "xdebug.max_nesting_level=200" >> /etc/php.d/xdebug.ini
 
 # start httpd
 RUN mkdir -p /home/jenkins/workspace/HR/docroot
-ENTRYPOINT ["/usr/sbin/apache2 -DFOREGROUND"]
-RUN rm -rf /home/jenkins/workspace
 
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network
-# start mysqld to create initial tables
-ENTRYPOINT ["/usr/bin/mysqld_safe"]
 
 # install sshd
 RUN yum install -y openssh-server openssh-clients passwd
