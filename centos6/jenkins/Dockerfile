@@ -16,7 +16,6 @@ RUN yum -y install sudo && chmod u+w /etc/sudoers && echo "jenkins ALL=(ALL) NOP
 
 # install httpd
 RUN yum -y install httpd vim-enhanced bash-completion unzip
-RUN sed -i "s^DocumentRoot \"/var/www/html\"^DocumentRoot \"/home/jenkins/workspace/HR/docroot\"^" /etc/httpd/conf/httpd.conf
 RUN sed -i "s^User apache^User jenkins^" /etc/httpd/conf/httpd.conf && sed -i "s^Group apache^Group jenkins^" /etc/httpd/conf/httpd.conf
 
 # php
