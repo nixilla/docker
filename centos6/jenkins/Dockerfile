@@ -28,6 +28,7 @@ RUN curl -O http://mirror.ox.ac.uk/sites/rsync.apache.org//ant/binaries/apache-a
 RUN tar -xjvf ./apache-ant-1.9.4-bin.tar.bz2 -C /opt/
 RUN ln -s /opt/apache-ant-1.9.4 /opt/apache-ant
 RUN mv /usr/bin/ant /usr/bin/ant1.7.1
+RUN ln -s /opt/apache-ant/bin/ant /usr/bin/ant
 RUN echo "export ANT_HOME=/opt/apache-ant" >> /etc/bashrc
 
 # zeromq
