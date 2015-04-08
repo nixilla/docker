@@ -19,9 +19,16 @@ RUN yum -y install httpd vim-enhanced bash-completion unzip
 RUN sed -i "s^User apache^User jenkins^" /etc/httpd/conf/httpd.conf && sed -i "s^Group apache^Group jenkins^" /etc/httpd/conf/httpd.conf
 
 # php
-RUN yum -y install git ant vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
+RUN yum -y install git ant tar bzip2 wget vim mc mysql mysql-server httpd php php-devel php-mysql php-gd php-pear php-xml php-mbstring php-mcrypt php-mssql php-tidy curl curl-devel php-pecl-apc
 RUN yum install -y uuid-devel pkgconfig libtool gcc-c++ php-pecl-xdebug php-pecl-uuid git php-intl
 RUN sed -i "s^;date.timezone =^date.timezone = Europe/London^" /etc/php.ini
+
+# update ant
+RUN curl -O http://mirror.ox.ac.uk/sites/rsync.apache.org//ant/binaries/apache-ant-1.9.4-bin.tar.bz2
+RUN tar -xjvf ./apache-ant-1.9.4-bin.tar.bz2 -C /opt/
+RUN ln -s /opt/apache-ant-1.9.4 /opt/apache-ant
+RUN mv /usr/bin/ant /usr/bin/ant1.7.1
+RUN echo "export ANT_HOME=/opt/apache-ant" >> /etc/bashrc
 
 # zeromq
 RUN yum install -y zeromq zeromq-devel
